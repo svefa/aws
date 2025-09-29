@@ -150,3 +150,26 @@
 
 ---
 
+### Many (but not all) services outside the VPC follow the serverless model, but being “outside VPC” ≠ automatically serverless.
+Why many outside-VPC services are serverless?
+  - They’re managed by AWS → no servers to provision/patch.
+  - They scale automatically.
+  - You pay for usage, not infrastructure uptime.
+#### Examples:
+  - S3 → serverless object storage (no servers to manage).
+  - DynamoDB → serverless NoSQL DB.
+  - SQS, SNS, EventBridge → serverless messaging.
+  - API Gateway → serverless API hosting.
+  - Cognito → serverless identity.
+  - Kinesis (Firehose/Data Streams) → mostly serverless streaming (though shards = capacity planning).
+  - CloudFront / Route 53 → serverless global edge services.
+#### Counterexamples (outside VPC but not fully serverless)
+Some services outside the VPC still require capacity planning or throughput tuning:
+  - Kinesis Data Streams → you manage shards (not fully serverless, Aurora Serverless-style).
+  - OpenSearch (if accessed via endpoint) → managed service, but you still choose cluster size (not serverless).
+  - RDS (non-Aurora Serverless) → inside VPC, but still provisioned servers.
+
+
+
+
+
